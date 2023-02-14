@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.display {
+    padding: 100px;
+    border: solid;
+    border-color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    
+}
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+
+}
+
+.buttons button {
+    color: red;
+    height: 100px;
+    width: 100px;
+}
+
