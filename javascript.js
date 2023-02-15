@@ -2,8 +2,12 @@ let enteredValue = 0;
 let storedValue = 0;
 let displayValue = 0;
 
-const display = document.querySelector('.display');
+const display = document.querySelector('.displayUpper');
 display.textContent = displayValue;
+
+const displayLower = document.querySelector('.displayLower');
+displayLower.textContent = displayValue;
+
 
 function add(a, b) {
     a = parseInt(a);
@@ -53,10 +57,12 @@ equalsButton.addEventListener('click', result);
 
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', () => {
-    let enteredValue = 0;
-    let storedValue = 0;
-    let displayValue = 0;
+    enteredValue = 0;
+    storedValue = 0;
+    displayValue = 0;
+    console.log(`entered = ${enteredValue}, stored = ${storedValue}, display = ${displayValue}`);
     display.textContent = "Cleared";
+    displayLower.textContent = 0;
 });
 
 function enterValue(e) {
@@ -75,7 +81,7 @@ function enterValue(e) {
 
 function operate(e) {
 
-    if((storedValue != 0) && (enteredValue != 0)) {
+    if((storedValue != 0) && (enteredValue != 0)) { //Allows for sequences of operands
         result();
     }
     
@@ -90,25 +96,25 @@ function result(e) {
 
     switch(operator) {
         case "+":
-            displayValue = add(storedValue, enteredValue);
-            console.log(displayValue);
+            displayValue = roundNum(add(storedValue, enteredValue));
             break;
         case "-":
-            displayValue = subtract(storedValue, enteredValue);
+            displayValue = roundNum(subtract(storedValue, enteredValue));
             break;
         case "*":
-            displayValue = multiply(storedValue, enteredValue);
+            displayValue = roundNum(multiply(storedValue, enteredValue));
             break;
         case "/":
-            displayValue = divide(storedValue, enteredValue);
-            break;
-        case "C":
-            displayValue = 0;
+            displayValue = roundNum(divide(storedValue, enteredValue));
+            
             break;
     }
     
-    display.textContent =  displayValue;
+    displayLower.textContent =  displayValue;
     enteredValue = displayValue;
     storedValue = 0;
 }
 
+function roundNum(value) {
+    return Math.round(value * 1000) / 1000;
+}

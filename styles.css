@@ -14,8 +14,17 @@ body {
     display: flex;
     flex-direction: column;
     height: 600px;
-    
 }
+
+.displayContainer {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    padding: 50px;
+    align-items: flex-end;
+}
+
+
 .buttons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
