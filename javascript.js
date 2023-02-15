@@ -1,13 +1,9 @@
 let enteredValue = 0;
 let storedValue = 0;
 let displayValue = 0;
-let answer = 0;
-let operator = "waiting";
 
 const display = document.querySelector('.display');
 display.textContent = displayValue;
-
-
 
 function add(a, b) {
     a = parseInt(a);
@@ -34,7 +30,7 @@ function divide(a, b) {
         return a/b;
     }
     else {
-        
+
         return "ERROR";
     }
     
@@ -44,11 +40,7 @@ function operate(operator, a, b) {
     operator(a, b);
 }
 
-//store user entry
-//update if additional number pressed
-//store user operator
-//store next user entry
-//when "=" then calculate
+
 
 const valueButtons = document.querySelectorAll('.value');
 valueButtons.forEach(valueButton => valueButton.addEventListener('click', enterValue));
@@ -58,6 +50,14 @@ operatorButtons.forEach(operatorButton => operatorButton.addEventListener('click
 
 const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', result);
+
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', () => {
+    let enteredValue = 0;
+    let storedValue = 0;
+    let displayValue = 0;
+    display.textContent = "Cleared";
+});
 
 function enterValue(e) {
     if(enteredValue === 0){
@@ -74,8 +74,12 @@ function enterValue(e) {
 }
 
 function operate(e) {
+
+    if((storedValue != 0) && (enteredValue != 0)) {
+        result();
+    }
+    
     operator = e.target.textContent;
-    console.log(operator);
     storedValue = enteredValue;
     enteredValue = 0;
     display.textContent = operator;
@@ -83,7 +87,7 @@ function operate(e) {
 
 function result(e) {
     console.log("result");
-    //console.log(e.target.textContent);
+
     switch(operator) {
         case "+":
             displayValue = add(storedValue, enteredValue);
@@ -102,8 +106,9 @@ function result(e) {
             displayValue = 0;
             break;
     }
-    //displayValue = add(enteredValue, storedValue);
+    
     display.textContent =  displayValue;
-    enteredValue = 0;
-    storedValue = displayValue;
+    enteredValue = displayValue;
+    storedValue = 0;
 }
+
