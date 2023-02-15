@@ -10,19 +10,34 @@ display.textContent = displayValue;
 
 
 function add(a, b) {
-    return a+b;
+    a = parseInt(a);
+    b = parseInt(b);
+    return a+b
 }
 
 function subtract(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
     return a-b;
 }
 
 function multiply(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
     return a*b;
 }
 
 function divide(a, b) {
-    return b/a;
+    a = parseInt(a);
+    b = parseInt(b);
+    if(b !== 0){
+        return a/b;
+    }
+    else {
+        
+        return "ERROR";
+    }
+    
 }
 
 function operate(operator, a, b) {
@@ -45,15 +60,25 @@ const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', result);
 
 function enterValue(e) {
-   
-    enteredValue = parseInt(e.target.textContent);
+    if(enteredValue === 0){
+        enteredValue = parseInt(e.target.textContent);
+    }
+    else {
+        enteredValue = "" + enteredValue + e.target.textContent;
+    }
+    
+    
     console.log(`value = ${enteredValue}`);
+    console.log(`stored value = ${storedValue}`);
+    display.textContent = enteredValue;
 }
 
 function operate(e) {
     operator = e.target.textContent;
     console.log(operator);
     storedValue = enteredValue;
+    enteredValue = 0;
+    display.textContent = operator;
 }
 
 function result(e) {
@@ -61,20 +86,24 @@ function result(e) {
     //console.log(e.target.textContent);
     switch(operator) {
         case "+":
-            displayValue = add(enteredValue, storedValue);
+            displayValue = add(storedValue, enteredValue);
+            console.log(displayValue);
             break;
         case "-":
-            displayValue = subtract(enteredValue, storedValue);
+            displayValue = subtract(storedValue, enteredValue);
             break;
         case "*":
-            displayValue = multiply(enteredValue, storedValue);
+            displayValue = multiply(storedValue, enteredValue);
             break;
         case "/":
-            displayValue = divide(enteredValue, storedValue);
+            displayValue = divide(storedValue, enteredValue);
+            break;
+        case "C":
+            displayValue = 0;
             break;
     }
     //displayValue = add(enteredValue, storedValue);
     display.textContent =  displayValue;
     enteredValue = 0;
-    storedValue = 0;
+    storedValue = displayValue;
 }
