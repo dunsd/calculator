@@ -3,6 +3,7 @@ let enteredValue = 0;
 let storedValue = 0;
 let displayValue = 0;
 let operator = "equals"
+const numReg = /^[0-9]/g; 
 
 //Select elements to use
 const display = document.querySelector('.displayUpper');
@@ -20,6 +21,10 @@ operatorButtons.forEach(operatorButton => operatorButton.addEventListener('click
 const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', result);
 
+document.addEventListener('keydown', (e) => { //Allow keyboard inputs for all buttons
+        document.getElementById(e.key).click();
+});
+
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', () => {
     enteredValue = 0;
@@ -28,7 +33,7 @@ clearButton.addEventListener('click', () => {
     console.log(`entered = ${enteredValue}, stored = ${storedValue}, display = ${displayValue}`);
     display.textContent = "Cleared";
     displayLower.textContent = 0;
-});
+}); 
 
 //Maths function
 function add(a, b) {
