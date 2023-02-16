@@ -62,11 +62,11 @@ function divide(a, b) {
     a = parseFloat(a);
     b = parseFloat(b);
     if(b !== 0){
+        console.log("DIVIDE");
         return a/b;
     }
     else {
-
-        return "ERROR";
+        return "ERROR"; //Send error to result function to stop divide by 0
     }
     
 }
@@ -119,6 +119,11 @@ function result(e) {
             displayValue = roundNum(multiply(storedValue, enteredValue));
             break;
         case "/":
+            if(divide(storedValue, enteredValue) === "ERROR"){
+                displayValue = 0;
+                alert("You can't divide by 0!");
+                break;
+            }
             displayValue = roundNum(divide(storedValue, enteredValue)); 
             break;
     }
