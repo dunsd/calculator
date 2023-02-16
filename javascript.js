@@ -22,7 +22,11 @@ const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', result);
 
 document.addEventListener('keydown', (e) => { //Allow keyboard inputs for all buttons
-        document.getElementById(e.key).click();
+    let keyEvent = document.getElementById(e.key);
+    if(keyEvent === null){
+        return;
+    }
+    keyEvent.click();
 });
 
 const clearButton = document.querySelector('.clear');
@@ -72,13 +76,17 @@ function operate(operator, a, b) {
 }
 
 function enterValue(e) {
+    if(enteredValue.toString().length === 9){
+        alert("Maximum length of 10 characters reached!")
+        return;
+    }
+
     if(enteredValue === 0){
         enteredValue = parseInt(e.target.textContent);
     }
     else {
         enteredValue = "" + enteredValue + e.target.textContent;
     }
-    
     
     console.log(`value = ${enteredValue}`);
     console.log(`stored value = ${storedValue}`);
