@@ -1,50 +1,15 @@
+//Initialise variables
 let enteredValue = 0;
 let storedValue = 0;
 let displayValue = 0;
+let operator = "equals"
 
+//Select elements to use
 const display = document.querySelector('.displayUpper');
 display.textContent = displayValue;
 
 const displayLower = document.querySelector('.displayLower');
 displayLower.textContent = displayValue;
-
-
-function add(a, b) {
-    a = parseInt(a);
-    b = parseInt(b);
-    return a+b
-}
-
-function subtract(a, b) {
-    a = parseInt(a);
-    b = parseInt(b);
-    return a-b;
-}
-
-function multiply(a, b) {
-    a = parseInt(a);
-    b = parseInt(b);
-    return a*b;
-}
-
-function divide(a, b) {
-    a = parseInt(a);
-    b = parseInt(b);
-    if(b !== 0){
-        return a/b;
-    }
-    else {
-
-        return "ERROR";
-    }
-    
-}
-
-function operate(operator, a, b) {
-    operator(a, b);
-}
-
-
 
 const valueButtons = document.querySelectorAll('.value');
 valueButtons.forEach(valueButton => valueButton.addEventListener('click', enterValue));
@@ -64,6 +29,42 @@ clearButton.addEventListener('click', () => {
     display.textContent = "Cleared";
     displayLower.textContent = 0;
 });
+
+//Maths function
+function add(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    return a+b
+}
+
+function subtract(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    return a-b;
+}
+
+function multiply(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    return a*b;
+}
+
+function divide(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    if(b !== 0){
+        return a/b;
+    }
+    else {
+
+        return "ERROR";
+    }
+    
+}
+//Operator/results functions
+function operate(operator, a, b) {
+    operator(a, b);
+}
 
 function enterValue(e) {
     if(enteredValue === 0){
@@ -105,8 +106,7 @@ function result(e) {
             displayValue = roundNum(multiply(storedValue, enteredValue));
             break;
         case "/":
-            displayValue = roundNum(divide(storedValue, enteredValue));
-            
+            displayValue = roundNum(divide(storedValue, enteredValue)); 
             break;
     }
     
@@ -118,3 +118,5 @@ function result(e) {
 function roundNum(value) {
     return Math.round(value * 1000) / 1000;
 }
+
+
